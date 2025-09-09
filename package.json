@@ -1,16 +1,35 @@
 {
-  "name": "lu1",
+  "name": "lu1-sakila-poc",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "watch:server": "nodemon --watch src --ext js,ts,json --exec node ./bin/www",
+    "watch:client": "browser-sync start --proxy localhost:3000 --files=**/*  --ignore=node_modules --reload-delay 100 --no-ui --no-inject-changes  --port 3001",
+    "dev": "concurrently -k -n server,bs \"npm:watch:server\" \"npm:watch:client\""
+  },
+    "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true
   },
   "dependencies": {
+    "chai": "^6.0.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "mysql2": "^3.14.5"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.4",
+    "concurrently": "^9.2.1",
+    "dotenv": "^17.2.2",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "winston": "^3.17.0"
   }
 }
