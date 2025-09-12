@@ -1,0 +1,25 @@
+<%- include('../layout') %>
+
+<div class="card" style="max-width: 30rem;">
+  <div class="card-header">
+    Change film info
+  </div>
+  <div class="card-body">
+    <form method="POST" action='/films/<%= films.film_id %>/edit'>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title" value="<%= films.title %>">
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3"><%= films.description %></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="length" class="form-label">length</label>
+        <textarea class="form-control" id="length" name="length" rows="3"><%= films.length %></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-warning" onclick="window.location.href='/films/<%= films.film_id %>/details'">Cancel</button>
+    </form>
+  </div>
+</div>
