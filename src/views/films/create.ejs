@@ -15,9 +15,32 @@
             <textarea class="form-control" id="description" name="description" rows="3"></textarea>
         </div>
         <div class="mb-3">
-            <label for="genre" class="form-label">Genres</label>
-            <textarea class="form-control" id="genre" name="genre" rows="3"></textarea>
+            <label for="genre" class="form-label">Genre 1</label>
+            <select class="form-select" id="genre" name="genre">
+                <%= genres.forEach(function(genre) { %>
+                    <option value=<%=genre.id %>><%=genre.name %></option>
+                <% }) %>
+            </select>
         </div>
+        <!-- <div class="mb-3">
+            <label for="genre2" class="form-label">Genre 2</label>
+            <select class="form-select" id="genre2" name="genre2">
+                <%= genres.forEach(function(genre) { %>
+                    <option value=<%=genre.id %>><%=genre.name %></option>
+                <% }) %>
+                <option value=<%= undefined %>>None</option>
+            </select>
+            <input type="text" class="form-control" id="genre3" name="genre3" value="">
+        </div>
+        <div class="mb-3">
+            <label for="genre3" class="form-label">Genre 3</label>
+            <select class="form-select" id="genre3" name="genre3">
+                <%= genres.forEach(function(genre) { %>
+                    <option value=<%=genre.id %>><%=genre.name %></option>
+                <% }) %>
+                <option value=<%= undefined %>>None</option>
+            </select>
+        </div> -->
         <div class="mb-3">
             <label for="year" class="form-label">Release Year</label>
             <input type="number" class="form-control" id="year" name="year" min="1800" max="2100" step="1" value="" aria-describedby="yearHelp">
@@ -62,10 +85,23 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="actor" class="form-label">Actors</label>
-            <textarea class="form-control" id="actor" name="actor" rows="3"></textarea>
+            <label for="actor" class="form-label">Actor 1</label>
+            <select class="form-select" id="actor" name="actor">
+                <%= genres.forEach(function(genre) { %>
+                    <option value=<%=genre.id %>><%=genre.name %></option>
+                <% }) %>
+            </select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <!-- <div class="mb-3">
+            <label for="actor2" class="form-label">Actor 2</label>
+            <select class="form-select" id="actor2" name="actor2">
+                <%= actors.forEach(function(actor) { %>
+                    <option value=<%=actor.id %>><%=actor.first_name, actor.last_name %></option>
+                <% }) %>
+                <option value=<%= undefined %>>None</option>
+            </select>
+        </div> -->
+        <button type="submit" class="btn btn-primary">Create</button>
         <button type="button" class="btn btn-warning" onclick="window.location.href='/films'">Cancel</button>
     </form>
   </div>

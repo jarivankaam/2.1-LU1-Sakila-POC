@@ -1,11 +1,11 @@
 const categoriesService = require('../services/categories.service');
 
 const categoriesController = {
-    insert: (req, res, next) => {
-        let {genre} = req.body
-        categoriesService.insert(genre, (error, results) => {
+    get: (next) => {
+        categoriesService.get((error, results) => {
             if (error) next(error)
-            if (results) next(results)
+            if (results) console.log('results: ' + results)
+                // res.render('films/catalog', {genres: genre}, {actors: actors})
         })
     }
 }
