@@ -2,6 +2,15 @@ const filmsService = require('../services/films.service');
 const logger = require('../utils/logger');
 
 const filmsController = {
+    // validate: ( req, res, next ) => {
+    //     let filmId = req.params.filmId;
+    //     let{firstName, lastName, active, email} = req.body
+    //     active = parseInt(active)
+    //     usersService.validate(firstName, lastName, active, email, (error) => {
+    //         if (error) next(error)
+    //         next()
+    //     })
+    // },
     get: ( req, res, next) => {
         let filmId = req.params.filmId; 
         filmsService.get(filmId, (error, films) => {
@@ -27,6 +36,15 @@ const filmsController = {
                 res.redirect(301, `/films/${filmId}/details`)
             }
         });
+    },
+    insert: (req, res, next) => {
+        let {title, description, year, language, rental_duration, rental_rate, replacement_cost, rating} = req.body;
+        filmsService.insert(title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, (error, results) => {
+            if (error) next(error)
+            if (results) {
+                this.get()
+            }
+        })
     }
 };
 

@@ -39,6 +39,12 @@ const filmsService = {
             }
         })
     },
+    insert: (title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, callback) => {
+        actorsDao.insert(title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, (error, results) => {
+            if (error) callback(error, undefined)
+            if (results) callback(undefined, error)
+        })
+    }
 };
 
 module.exports = filmsService;
