@@ -1,5 +1,8 @@
 <%- include('../layout') %>
 <div class="row">
+        <div>
+        <button class="btn btn-primary">Add Film</button>
+    </div>
     <% films.forEach(function(film) { %>
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
             <div class="card h-100">
@@ -7,12 +10,10 @@
                     <div class="card-body">
                         <h5 class="card-title"><%= film.title %></h5>
                         <p class="card-text"><%= film.description %></p>
-                        <a href="films/<%= film.film_id %>/details" class="btn btn-primary">Info</a>
+                        <a href="films/<%= film.film_id %>/details" class="btn btn-primary">Film Info</a>
+                        <a class="btn btn-danger card-link" onclick="confirmFilmDelete('<%= film.film_id %>', this)">Delete Film</a>
                     </div>
             </div>
         </div>
     <% }) %>
-    <div>
-        <button>Add Film</button>
-    </div>
 </div>

@@ -57,7 +57,22 @@ const filmsDao = {
                 if (results) return callback(undefined, results);
             }
         )
-    }
+    },
+    delete: (filmId, callback) => {
+        database.query(
+            `DELETE FROM ?? WHERE ?? = ?`,
+            ['film', 'film_id', filmId],
+            (error, results) => {
+                if (error) {
+                    logger.debug(error, filmId)
+                    return callback(error, undefined);
+                }
+                if (results) {
+                    logger.debug(filmId)
+                    return callback(undefined, results);
+                }
+        })
+    },
 };
 
 module.exports = filmsDao
