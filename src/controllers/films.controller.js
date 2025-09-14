@@ -45,6 +45,21 @@ const filmsController = {
                 this.get()
             }
         })
+    },
+    delete: ( req, res, next) => {
+        let filmId = req.params.filmId; 
+        filmsService.delete(filmId, (error, result) => {
+            if (error) res.json({
+                status:500,
+                message: error,
+                data: []
+            });
+            if (result) res.json({
+                status:200,
+                message: 'film Deleted',
+                data: []
+            });
+        });
     }
 };
 

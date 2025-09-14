@@ -15,11 +15,9 @@ const filmsService = {
             LEFT JOIN category c ON fc.category_id = c.category_id
             WHERE f.film_id = ?
             GROUP BY f.film_id`;
-        // query = `SELECT * FROM ?? WHERE ?? = ?`,
         filmId == undefined 
         ? query_parameters = ['film']
         : query_parameters = [filmId];
-        // query_parameters= ['film', 'film_id', filmId],
         filmsDao.get(query, query_parameters, (error, films) => {
             if (error) return callback(error, undefined);
             if (films) {
@@ -40,9 +38,17 @@ const filmsService = {
         })
     },
     insert: (title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, callback) => {
-        actorsDao.insert(title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, (error, results) => {
+        filmsDao.insert(title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, (error, results) => {
             if (error) callback(error, undefined)
             if (results) callback(undefined, error)
+        })
+    },
+    delete: (filmId, callback) => {
+        filmsDao.delete(filmId, (error, status) => {
+            if (error) return callback(error, undefined);
+            if (status) {
+            return callback(undefined, status);
+            }
         })
     }
 };

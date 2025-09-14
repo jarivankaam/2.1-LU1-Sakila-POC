@@ -1,18 +1,15 @@
 <%- include('../layout') %>
 
 <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+  <img src="/images/default_profile_picture.jpg" class="card-img-top" alt="not available">
   <div class="card-body">
     <h5 class="card-title"><%= users.first_name %> <%= users.last_name %></h5>
-    <p class="card-text">
-      Some quick example text to build on the card title and make up the bulk of the card’s content.
-    </p>
   </div>
 
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><%= users.email %></li>
-    <li class="list-group-item"><%= users.active %></li>
-    <li class="list-group-item">A third item</li>
+    <li class="list-group-item">Email: <%= users.email %></li>
+    <li class="list-group-item">Address: <%= users.address %></li>
+    <li class="list-group-item">Active User: <%= users.active === 1 ? "Yes" : "No" %></li>
   </ul>
 
   <div class="card-body">
