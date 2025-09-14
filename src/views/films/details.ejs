@@ -1,0 +1,40 @@
+<%- include('../layout') %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col d-flex justify-content-center align-items-center vh-100">
+        <div class="card mb-3" style="max-width: 800px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                <img src="/images/no-image-available.png"
+                    class="img-fluid rounded-start"
+                    alt="not available"
+                    style="height: 100%; object-fit: contain;">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                    <h5 class="card-title"><%= films.title %></h5>
+                    <p class="card-text"><%= films.description %></p>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Genre: <%= films.genres %></span>
+                        <span>Rating: <%= films.rating %></span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Price: <%= films.rental_rate %></span>
+                        <span>Replacement Cost: <%= films.replacement_cost %></span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Length <%= films.length %></span>
+                        <span>Language: <%= films.language %></span>
+                    </li>
+                    </ul>
+                    <div class="mt-3">
+                    <a href="/films/<%= films.film_id %>/edit" class="btn btn-primary">Edit</a>
+                    <a href="/films" class="btn btn-warning">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

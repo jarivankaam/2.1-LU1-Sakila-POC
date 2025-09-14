@@ -1,0 +1,18 @@
+<%- include('../layout') %>
+<div class="row">
+    <% users.forEach(function(user) { %>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+            <div class="card h-100">
+                <img src="images/default_profile_picture.jpg" class="card-img-top" alt="Not available">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= user.first_name %> <%= user.last_name %></h5>
+                        <p class="card-text"><%= user.email %></p>
+                        <a href="users/<%= user.customer_id %>/details" class="btn btn-primary">Info</a>
+                    </div>
+            </div>
+        </div>
+    <% }) %>
+    <div>
+        <button>Add User</button>
+    </div>
+</div>

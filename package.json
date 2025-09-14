@@ -5,10 +5,10 @@
   "scripts": {
     "start": "node ./bin/www",
     "watch:server": "nodemon --watch src --ext js,ts,json --exec node ./bin/www",
-    "watch:client": "browser-sync start --proxy localhost:3000 --files=**/*  --ignore=node_modules --reload-delay 100 --no-ui --no-inject-changes  --port 3001",
+    "watch:client": "browser-sync start --proxy localhost:3002 --files=**/*  --ignore=node_modules --reload-delay 100 --no-ui --no-inject-changes  --port 3003",
     "dev": "concurrently -k -n server,bs \"npm:watch:server\" \"npm:watch:client\""
   },
-    "prettier": {
+  "prettier": {
     "trailingComma": "es5",
     "tabWidth": 2,
     "semi": true,
@@ -18,6 +18,7 @@
     "chai": "^6.0.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "ejs": "^3.1.10",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
