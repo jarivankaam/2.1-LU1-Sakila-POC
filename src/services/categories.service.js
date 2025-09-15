@@ -3,21 +3,33 @@ const categoriesDao = require('../dao/categories.dao');
 const categoriesService = {
     createCategories: (categories, callback) => {
         const ids = []
+        let index = 0
         let pending = categories.length
-        if (pending === 0) return callback('At least one category required', undefined)
-        categories.forEach(category => {
-            if (!category || category.trim() === '') {
-                pending--
-                if (pending === 0) callback(undefined, ids)
-                return
-            }
-            categoriesDao.createCategory(category, (error, id) => {
-                if (error) return callback(error)
-                ids.push(id)
-                pending--
-                if (pending === 0) callback(undefined, ids)
-            })
-        })
+        function processNext() {
+        if (index >= pending) return callback(undefined, ids)
+        const name = categories[index].trim()
+        if (!name) {
+            index++
+            return processNext()
+        }
+        categoriesDao.getCategoryByName(name, (error, existing) => {
+        if (error) return callback(error)
+
+        if (existing) {
+          ids.push(existing.category_id)
+          index++
+          processNext()
+        } else {
+          categoriesDao.createCategory(name, (error, newId) => {
+            if (error) return callback(error)
+            ids.push(newId)
+            index++
+            processNext()
+          })
+        }
+      })
+    }
+    processNext()
     }
 }
 

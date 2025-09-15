@@ -8,14 +8,14 @@ const actorsService = {
         actors.forEach(actor => {
             if (!actor.first_name || !actor.last_name) {
                 pending--
-                if (pending === 0) callback(null, ids)
+                if (pending === 0) callback(undefined, ids)
                 return
             }
-            actorsDao.createActor(actor.first_name, actor.last_name, (err, id) => {
-                if (err) return callback(err)
+            actorsDao.createActor(actor.first_name, actor.last_name, (error, id) => {
+                if (error) return callback(error)
                 ids.push(id)
                 pending--
-                if (pending === 0) callback(null, ids)
+                if (pending === 0) callback(undefined, ids)
             })
         })
     }
