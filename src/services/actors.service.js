@@ -1,10 +1,22 @@
-const actorsDao = require('../services/actors.dao');
+const actorsDao = require('../dao/actors.dao');
 
 const actorsService = {
-    insert: (callback) => {
-        actorsDao.insert((error, results) => {
-            if (error) callback(error, undefined)
-            if (results) callback(undefined, results)
+    createActors: (actors, callback) => {
+        const ids = []
+        let pending = actors.length
+        if (pending === 0) return callback(new Error('At least one actor required'))
+        actors.forEach(actor => {
+            if (!actor.first_name || !actor.last_name) {
+                pending--
+                if (pending === 0) callback(undefined, ids)
+                return
+            }
+            actorsDao.createActor(actor.first_name, actor.last_name, (error, id) => {
+                if (error) return callback(error)
+                ids.push(id)
+                pending--
+                if (pending === 0) callback(undefined, ids)
+            })
         })
     }
 }

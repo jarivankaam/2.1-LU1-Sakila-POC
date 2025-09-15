@@ -1,4 +1,7 @@
 const filmsService = require('../services/films.service');
+const categoriesService = require('../services/categories.service')
+const actorsService = require('../services/actors.service')
+const inventoriesService = require('../services/inventories.service')
 const logger = require('../utils/logger');
 
 const filmsController = {
@@ -25,27 +28,87 @@ const filmsController = {
     update: (req, res, next) => {
         let filmId = req.params.filmId;
         let {title, description, length} = req.body;
-        req.method == 'GET'
-        ? filmsService.get(filmId, (error, films) => {
+        if (req.method == 'GET') {
+            filmsService.get(filmId, (error, films) => {
             if (error) next(error);
             if (films) res.render('films/edit', {films: films[0]});
-        })
-        : filmsService.update(title, description, length, filmId, (error, result) => {
-            if (error) next(error);
-            if (result) {
-                res.redirect(301, `/films/${filmId}/details`)
-            }
-        });
+            })
+        }
+        else {
+            filmsService.getFilmByTitle(title, (err, existingFilm) => {
+                if (err) return next(err);
+                else {
+                    if (existingFilm && existingFilm.film_id != filmId) {
+                        return res.send('This title is already in use by another film');
+                    }
+                    filmsService.update(title, description, length, filmId, (error, result) => {
+                        if (error) next(error);
+                        if (result) {
+                            res.redirect(301, `/films/${filmId}/details`)
+                        }
+                    });
+                }
+            });
+        }
     },
-    insert: (req, res, next) => {
-        let {title, description, year, language, rental_duration, rental_rate, replacement_cost, rating} = req.body;
-        filmsService.insert(title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, (error, results) => {
-            if (error) next(error)
-            if (results) {
-                this.get()
+        createFilm: (req, res, next) => {
+            if (req.method == 'GET') {
+                res.render(`films/create`)
             }
-        })
-    },
+            else {
+                const { title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating, store_id } = req.body
+                filmsService.getFilmByTitle(title, (error, existingFilm) => {
+                    if (error) return next(error)
+                    if (existingFilm) return res.send('This Film already exists')
+                })
+                let categories = req.body.categories
+                let actors = req.body.actors
+                if (!Array.isArray(categories)) {
+                    categories = [categories]
+                }
+                if (!Array.isArray(actors)) {
+                    actors = [actors]
+                }
+                // creating category/categories
+                categoriesService.createCategories(categories, (error, categoryIds) => {
+                    if (error) return next(error)
+                    else {
+                        // creating actor(s)
+                        actorsService.createActors(actors, (error, actorIds) => {
+                            if (error) return next(error)
+                            else {
+                                // 3. Creating film
+                                filmsService.createFilm({ title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating }, (error, filmId) => {
+                                    if (error) return next(error)
+                                    else {
+                                        // 4. Linking films and category/categories
+                                        filmsService.addFilmCategories(filmId, categoryIds, (error) => {
+                                            if (error) return next(error)
+                                            else {
+                                                // 5. Linking films and actor(s)
+                                                filmsService.addFilmActors(filmId, actorIds, (error) => {
+                                                    if (error) return next(error)
+                                                    else{
+                                                        // 6. Linking film to store in inventory
+                                                        inventoriesService.addFilmToInventory(filmId, store_id, (error) => {
+                                                            if (error) return next(error)
+                                                            else {
+                                                                res.redirect(201, '/films')
+                                                            } 
+                                                        })
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        },
+
     delete: ( req, res, next) => {
         let filmId = req.params.filmId; 
         filmsService.delete(filmId, (error, result) => {
