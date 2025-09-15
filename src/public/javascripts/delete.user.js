@@ -1,11 +1,11 @@
   function confirmUserDelete(userId, buttonElement) {
     if (confirm("are you sure you want to delete this user?")) {
-      deleteButtonClicked(userId, buttonElement);
+      deleteUserButtonClicked(userId, buttonElement);
     }
     
   }
 
-function deleteFetch(userId, callback) {
+function deleteUserFetch(userId, callback) {
     fetch(`/users/${userId}`, {method:'DELETE'})
     .then((res) => res.json())
     .then((data) => {
@@ -14,12 +14,13 @@ function deleteFetch(userId, callback) {
         : callback(undefined, data)
     })
     .catch((err) => {
+      console.log(err)
       return callback(err, undefined);
     });
 }
-function deleteButtonClicked(userId, buttonElement){
+function deleteUserButtonClicked(userId, buttonElement){
     
-    deleteFetch(userId, (error, result) => {
+    deleteUserFetch(userId, (error, result) => {
         if (error){
             console.log('Error: ' + error)
         }

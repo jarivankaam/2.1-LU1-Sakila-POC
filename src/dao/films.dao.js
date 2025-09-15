@@ -60,8 +60,8 @@ const filmsDao = {
     },
     delete: (filmId, callback) => {
         database.query(
-            `DELETE FROM ?? WHERE ?? = ?`,
-            ['film', 'film_id', filmId],
+            `UPDATE ?? SET ?? = ? WHERE ?? = ?`,
+            ['film', 'active', 0, 'film_id', filmId],
             (error, results) => {
                 if (error) {
                     logger.debug(error, filmId)
