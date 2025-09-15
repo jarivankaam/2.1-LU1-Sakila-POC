@@ -1,4 +1,3 @@
-const { CreateFilm } = require('../controllers/films.controller');
 const filmsDao = require('../dao/films.dao');
 const logger = require('../utils/logger');
 
@@ -39,14 +38,31 @@ const filmsService = {
         })
     },
 
-    CreateFilm: (data, callback) => {
-        
+    CreateFilm: (filmData, callback) => {
+        filmsDao.createFilm(filmData, callback)
     },
+    addFilmCategories: (filmId, categoryIds, callback) => {
+        let pending = categoryIds.length
+        if (pending === 0) return callback(null)
 
-    insert: (title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, callback) => {
-        filmsDao.insert(title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, (error, results) => {
-            if (error) callback(error, undefined)
-            if (results) callback(undefined, error)
+        categoryIds.forEach(catId => {
+            filmsDao.addFilmCategory(filmId, catId, error => {
+                if (error) return callback(error)
+                pending--
+                if (pending === 0) callback(null)
+            })
+        })
+    },
+    addFilmActors: (filmId, actorIds, callback) => {
+        let pending = actorIds.length
+        if (pending === 0) return callback(null)
+
+        actorIds.forEach(actorId => {
+            filmsDao.addFilmActor(filmId, actorId, error => {
+                if (error) return callback(error)
+                pending--
+                if (pending === 0) callback(null)
+            })
         })
     },
     delete: (filmId, callback) => {

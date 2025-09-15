@@ -8,9 +8,7 @@ router.get('/:filmId/details', filmsController.get)
 router.get('/:filmId/edit', filmsController.update)
 router.post('/:filmId/edit', filmsController.update)
 router.delete('/:filmId', filmsController.delete);
-// router.post('/create', filmsController.insert, )
-// router.get('/create', function(req, res, next) {
-//   res.render('films/create');
-// });
+router.get('films/create', filmsController.createFilm)
+router.post('/films/create', filmsController.createFilm)
 
 module.exports = router;

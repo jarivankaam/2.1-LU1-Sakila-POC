@@ -1,20 +1,23 @@
-const categoriesDao = require('../services/categories.dao');
+const categoriesDao = require('../dao/categories.dao');
 
 const categoriesService = {
-    get: (category, callback) => {
-        categoriesDao.validate(category, (results) => {
-            if (results == undefined) {
-                categoriesDao.insert(category,(error, results) => {
-                if (error) callback(error, undefined)
-                if (results) callback(undefined, results)
-                })
+    createCategories: (categories, callback) => {
+        const ids = []
+        let pending = categories.length
+        if (pending === 0) return callback('At least one category required', undefined)
+        categories.forEach(category => {
+            if (!category || category.trim() === '') {
+                pending--
+                if (pending === 0) callback(undefined, ids)
+                return
             }
-            else {
-                let category_id = results.category_id
-                callback(undefined, category_id)
-            }
-        }) 
-        
+            categoriesDao.createCategory(category, (error, id) => {
+                if (error) return callback(error)
+                ids.push(id)
+                pending--
+                if (pending === 0) callback(undefined, ids)
+            })
+        })
     }
 }
 
