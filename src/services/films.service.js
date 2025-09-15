@@ -37,31 +37,33 @@ const filmsService = {
             }
         })
     },
-
-    CreateFilm: (filmData, callback) => {
+    getFilmByTitle: (title, callback) => {
+        filmsDao.getFilmByTitle(title, callback)
+    },
+    createFilm: (filmData, callback) => {
         filmsDao.createFilm(filmData, callback)
     },
     addFilmCategories: (filmId, categoryIds, callback) => {
         let pending = categoryIds.length
-        if (pending === 0) return callback(null)
+        if (pending === 0) return callback(undefined)
 
         categoryIds.forEach(catId => {
             filmsDao.addFilmCategory(filmId, catId, error => {
                 if (error) return callback(error)
                 pending--
-                if (pending === 0) callback(null)
+                if (pending === 0) callback(undefined)
             })
         })
     },
     addFilmActors: (filmId, actorIds, callback) => {
         let pending = actorIds.length
-        if (pending === 0) return callback(null)
+        if (pending === 0) return callback(undefined)
 
         actorIds.forEach(actorId => {
             filmsDao.addFilmActor(filmId, actorId, error => {
                 if (error) return callback(error)
                 pending--
-                if (pending === 0) callback(null)
+                if (pending === 0) callback(undefined)
             })
         })
     },

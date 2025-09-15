@@ -7,48 +7,31 @@
   <div class="card-body">
     <form method="POST" action='/films/create'>
         <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" name="title" value="">
+            <label for="title" class="form-label">Title*</label>
+            <input type="text" class="form-control" id="title" name="title" value="" required>
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+            <label for="description" class="form-label">Description*</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
         </div>
         <div class="mb-3">
-            <label for="genre" class="form-label">Genre 1</label>
-            <select class="form-select" id="genre" name="genre">
-                <%= genres.forEach(function(genre) { %>
-                    <option value=<%=genre.id %>><%=genre.name %></option>
-                <% }) %>
-            </select>
+            <label for="categories[]" class="form-label">Genre 1*</label>
+            <input type="text" class="form-control" id="categories[]" name="categories[]" value="" required>
+            <label for="categories[]" class="form-label">Genre 2</label>
+            <input type="text" class="form-control" id="categories[]" name="categories[]" value="">
+            <label for="categories[]" class="form-label">Genre 3</label>
+            <input type="text" class="form-control" id="categories[]" name="categories[]" value="">
+            
         </div>
-        <!-- <div class="mb-3">
-            <label for="genre2" class="form-label">Genre 2</label>
-            <select class="form-select" id="genre2" name="genre2">
-                <%= genres.forEach(function(genre) { %>
-                    <option value=<%=genre.id %>><%=genre.name %></option>
-                <% }) %>
-                <option value=<%= undefined %>>None</option>
-            </select>
-            <input type="text" class="form-control" id="genre3" name="genre3" value="">
-        </div>
+       
         <div class="mb-3">
-            <label for="genre3" class="form-label">Genre 3</label>
-            <select class="form-select" id="genre3" name="genre3">
-                <%= genres.forEach(function(genre) { %>
-                    <option value=<%=genre.id %>><%=genre.name %></option>
-                <% }) %>
-                <option value=<%= undefined %>>None</option>
-            </select>
-        </div> -->
-        <div class="mb-3">
-            <label for="year" class="form-label">Release Year</label>
-            <input type="number" class="form-control" id="year" name="year" min="1800" max="2100" step="1" value="" aria-describedby="yearHelp">
+            <label for="year" class="form-label">Release Year*</label>
+            <input type="number" class="form-control" id="year" name="year" min="1800" max="2100" step="1" value="" aria-describedby="yearHelp" required>
             <div id="yearHelp" class="form-text">Fill in the release year, must be between 1800-2100</div>
         </div>
         <div class="mb-3">
-            <label for="language" class="form-label">Language</label>
-            <select class="form-select" id="language" name="language">
+            <label for="language_id" class="form-label">Language*</label>
+            <select class="form-select" id="language_id" name="language_id" required>
                 <option value="1">English</option>
                 <option value="2">Italian</option>
                 <option value="3">Japanese</option>
@@ -58,25 +41,25 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="rental_duration" class="form-label">rental duration (Days)</label>
-            <input type="number" class="form-control" id="rental_duration" name="rental_duration" value="">
+            <label for="rental_duration" class="form-label">rental duration (Days)*</label>
+            <input type="number" class="form-control" id="rental_duration" name="rental_duration" value="" required>
         </div>
         <div class="mb-3">
-            <label for="rental_rate" class="form-label">rental rate (dollars)</label>
-            <input type="number" class="form-control" id="rental_rate" name="rental_rate" value="">
+            <label for="rental_rate" class="form-label">rental rate (dollars)*</label>
+            <input type="number" class="form-control" id="rental_rate" name="rental_rate" step="0.01" min="0" max="10" value="" required>
         </div>
         <div class="mb-3">
-            <label for="length" class="form-label">length (minutes)</label>
-            <input type="number" class="form-control" id="length" name="length" min="10" max="720" step="1"value="">
+            <label for="length" class="form-label">length (minutes)*</label>
+            <input type="number" class="form-control" id="length" name="length" min="10" max="720" step="1" value="" required>
             <div id="lengthHelp" class="form-text">Fill in the length of the movie, must be between 10-720 minutes</div>
         </div>
         <div class="mb-3">
-            <label for="replacement_cost" class="form-label">Replacement_cost (dollars)</label>
-            <input type="number" class="form-control" id="replacement_cost" name="replacement_cost" value="">
+            <label for="replacement_cost" class="form-label">Replacement_cost (dollars)*</label>
+            <input type="number" class="form-control" id="replacement_cost" name="replacement_cost" step="0.01" min="5" max="100" value="" required>
         </div>
         <div class="mb-3">
-            <label for="rating" class="form-label">Rating</label>
-            <select class="form-select" id="rating" name="rating">
+            <label for="rating" class="form-label">Rating*</label>
+            <select class="form-select" id="rating" name="rating" required>
                 <option value="PG">PG</option>
                 <option value="G">G</option>
                 <option value="R">R</option>
@@ -85,22 +68,24 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="actor" class="form-label">Actor 1</label>
-            <select class="form-select" id="actor" name="actor">
-                <%= genres.forEach(function(genre) { %>
-                    <option value=<%=genre.id %>><%=genre.name %></option>
-                <% }) %>
+            <label for="actor" class="form-label">Actor 1*</label>
+            <div>
+            <input class="form-control" type="text" name="actors[0][first_name]" placeholder="first name" required>
+            <input class="form-control" type="text" name="actors[0][last_name]" placeholder="last name" required><br>
+            </div>
+            <div class="mb-3">
+            <label for="actor" class="form-label">Actor 2</label>
+            <input class="form-control" type="text" name="actors[1][first_name]" placeholder="first name">
+            <input class="form-control" type="text" name="actors[1][last_name]" placeholder="last name">
+            </div>
+        </div>
+        <div>
+            <label for="store_id">Store*</label>
+            <select id="store_id" name="store_id" required>
+                <option value="1">Store 1</option>
+                <option value="2">Store 2</option>
             </select>
         </div>
-        <!-- <div class="mb-3">
-            <label for="actor2" class="form-label">Actor 2</label>
-            <select class="form-select" id="actor2" name="actor2">
-                <%= actors.forEach(function(actor) { %>
-                    <option value=<%=actor.id %>><%=actor.first_name, actor.last_name %></option>
-                <% }) %>
-                <option value=<%= undefined %>>None</option>
-            </select>
-        </div> -->
         <button type="submit" class="btn btn-primary">Create</button>
         <button type="button" class="btn btn-warning" onclick="window.location.href='/films'">Cancel</button>
     </form>
