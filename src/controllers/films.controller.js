@@ -37,6 +37,46 @@ const filmsController = {
             }
         });
     },
+        CreateFilm: (req, res, next) => {
+        const { title, description, release_year, language_id, categories, actors, store_id } = req.body
+        // creating category/categories
+        categoryService.createCategories(categories, (error, categoryIds) => {
+            if (error) return next(error)
+            else {
+                // creating actor(s)
+            actorService.createActors(actors, (error, actorIds) => {
+            if (error) return next(error)
+
+            // 3. film aanmaken
+            filmService.createFilm({ title, description, release_year, language_id }, (error, filmId) => {
+                if (error) return next(error)
+
+                // 4. koppelen film ↔ categorieën
+                filmService.addFilmCategories(filmId, categoryIds, (error) => {
+                if (error) return next(error)
+
+                // 5. koppelen film ↔ acteurs
+                filmService.addFilmActors(filmId, actorIds, (error) => {
+                    if (error) return next(error)
+
+                    // 6. inventory toevoegen
+                    inventoryService.addFilmToInventory(filmId, store_id, (error) => {
+                        if (error) return next(error)
+                    
+                        res.status(201).json({ 
+                            message: 'Film created successfully', filmId, title 
+                        })
+                    })
+                })
+                })
+            })
+            })
+            }
+        })
+    },
+    
+    
+    
     insert: (req, res, next) => {
         let {title, description, year, language, rental_duration, rental_rate, replacement_cost, rating} = req.body;
         filmsService.insert(title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, (error, results) => {
@@ -45,6 +85,21 @@ const filmsController = {
                 this.get()
             }
         })
+    },
+    delete: ( req, res, next) => {
+        let filmId = req.params.filmId; 
+        filmsService.delete(filmId, (error, result) => {
+            if (error) res.json({
+                status:500,
+                message: error,
+                data: []
+            });
+            if (result) res.json({
+                status:200,
+                message: 'film Deleted',
+                data: []
+            });
+        });
     }
 };
 

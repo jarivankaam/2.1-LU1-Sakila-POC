@@ -1,3 +1,4 @@
+const { CreateFilm } = require('../controllers/films.controller');
 const filmsDao = require('../dao/films.dao');
 const logger = require('../utils/logger');
 
@@ -6,7 +7,7 @@ const filmsService = {
         let query;
         let query_parameters;
         filmId == undefined     
-        ? query = `SELECT * FROM ??`
+        ? query = `SELECT * FROM ?? WHERE ?? = ?`
         : query = `SELECT f.film_id, f.title, f.description, f.rental_rate, f.rating, f.replacement_cost, f.length, l.name AS language,
             GROUP_CONCAT(c.name SEPARATOR ', ') AS genres
             FROM film f
@@ -15,11 +16,9 @@ const filmsService = {
             LEFT JOIN category c ON fc.category_id = c.category_id
             WHERE f.film_id = ?
             GROUP BY f.film_id`;
-        // query = `SELECT * FROM ?? WHERE ?? = ?`,
         filmId == undefined 
-        ? query_parameters = ['film']
+        ? query_parameters = ['film' , 'active', 1]
         : query_parameters = [filmId];
-        // query_parameters= ['film', 'film_id', filmId],
         filmsDao.get(query, query_parameters, (error, films) => {
             if (error) return callback(error, undefined);
             if (films) {
@@ -39,10 +38,23 @@ const filmsService = {
             }
         })
     },
+
+    CreateFilm: (data, callback) => {
+        
+    },
+
     insert: (title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, callback) => {
-        actorsDao.insert(title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, (error, results) => {
+        filmsDao.insert(title, description, year, language, rental_duration, rental_rate, replacement_cost, rating, (error, results) => {
             if (error) callback(error, undefined)
             if (results) callback(undefined, error)
+        })
+    },
+    delete: (filmId, callback) => {
+        filmsDao.delete(filmId, (error, status) => {
+            if (error) return callback(error, undefined);
+            if (status) {
+            return callback(undefined, status);
+            }
         })
     }
 };
