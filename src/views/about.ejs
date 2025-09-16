@@ -1,114 +1,157 @@
 <%- include('layout') %>
 
-<div class="epics-user-stories">
-  <h1>Epics en User Stories met acceptatiecriteria</h1>
+<div class="container my-5">
+  <h1 class="mb-4">Epics en User Stories met acceptatiecriteria</h1>
 
-  <div class="epic1">
-    <h2>Epic 1</h2>
-    <p>Als medewerker wil ik de filmcatalogus kunnen beheren, zodat de collectie actueel en correct blijft.</p>
-    <h2>User Stories</h2>
-    <ol>
-      <li>
-        Als medewerker wil ik alle films kunnen bekijken en filteren op verhuurd of beschikbaar, zodat ik snel inzicht heb in de status van de filmcollectie.
-        <h3>Acceptatiecriteria:</h3>
-        <ul>
-          <li>Het systeem toont een compleet overzicht van alle films.</li>
-          <li>Ik kan eenvoudig filteren op "beschikbaar" en "verhuurd".</li>
-          <li>Bij gebruik van meerdere filters verschijnt alleen de juiste selectie.</li>
-        </ul>
-        <p></p>
-      </li>
-      <li>
-        Als medewerker wil ik een nieuwe film kunnen toevoegen aan het systeem, zodat nieuwe titels meteen beschikbaar zijn voor verhuur.
-        <h3>Acceptatiecriteria:</h3>
-        <ul>
-          <li>Het systeem verplicht het invullen van titel, omschrijving, prijs en status.</li>
-          <li>Bij correcte invoer wordt de film toegevoegd en direct zichtbaar in de catalogus.</li>
-          <li>Als verplichte velden ontbreken, geeft het systeem een duidelijke foutmelding.</li>
-        </ul>
-        <p></p>
-      </li>
-      <li>
-        Als medewerker wil ik een film uit het systeem kunnen verwijderen als deze niet meer beschikbaar is in de winkel, zodat de catalogus actueel blijft.
-        <h3>Acceptatiecriteria:</h3>
-        <ul>
-          <li>Films zonder lopende uitleen kunnen zonder problemen verwijderd worden.</li>
-          <li>Films die nog zijn uitgeleend, kunnen niet verwijderd worden; het systeem geeft een duidelijke melding.</li>
-        </ul>
-        <p></p>
-      </li>
-      <li>
-        Als medewerker wil ik bestaande filmgegevens (zoals prijs of omschrijving) kunnen aanpassen, zodat de informatie altijd up-to-date is.
-        <h3>Acceptatiecriteria:</h3>
-        <ul>
-          <li>Bij het wijzigen van gegevens worden de nieuwe waarden correct opgeslagen en zichtbaar.</li>
-          <li>Het systeem controleert verplichte velden en geeft een melding als iets ontbreekt.</li>
-        </ul>
-        <p></p>
-      </li>
-    </ol>
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      <h2 class="h5 mb-0">Epic 1</h2>
+    </div>
+    <div class="card-body">
+      <p class="mb-3">Als medewerker wil ik de filmcatalogus kunnen beheren, zodat de collectie actueel en correct blijft.</p>
+      <h3 class="h6 mb-3">User Stories</h3>
+
+      <div class="card mb-3 border-start border-4 border-primary shadow-sm">
+        <div class="card-body">
+          <p>Als medewerker wil ik alle films kunnen bekijken en filteren op verhuurd of beschikbaar.</p>
+          <h4 class="h6">
+            <span class="badge bg-primary">Acceptatiecriteria</span>
+          </h4>
+          <ul>
+            <li>Het systeem toont een compleet overzicht van alle films.</li>
+            <li>Ik kan eenvoudig filteren op "beschikbaar" en "verhuurd".</li>
+            <li>Bij gebruik van meerdere filters verschijnt alleen de juiste selectie.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mb-3 border-start border-4 border-primary shadow-sm">
+        <div class="card-body">
+          <p>Als medewerker wil ik een nieuwe film kunnen toevoegen.</p>
+          <h4 class="h6">
+            <span class="badge bg-primary">Acceptatiecriteria</span>
+          </h4>
+          <ul>
+            <li>Titel, omschrijving, prijs en status zijn verplicht.</li>
+            <li>Film wordt direct zichtbaar in de catalogus.</li>
+            <li>Ontbrekende verplichte velden geven een foutmelding.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mb-3 border-start border-4 border-primary shadow-sm">
+        <div class="card-body">
+          <p>Als medewerker wil ik een film kunnen verwijderen.</p>
+          <h4 class="h6">
+            <span class="badge bg-primary">Acceptatiecriteria</span>
+          </h4>
+          <ul>
+            <li>Films zonder lopende uitleen kunnen verwijderd worden.</li>
+            <li>Films die nog uitgeleend zijn, kunnen niet verwijderd worden; foutmelding verschijnt.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mb-3 border-start border-4 border-primary shadow-sm">
+        <div class="card-body">
+          <p>Als medewerker wil ik filmgegevens kunnen aanpassen.</p>
+          <h4 class="h6">
+            <span class="badge bg-primary">Acceptatiecriteria</span>
+          </h4>
+          <ul>
+            <li>Nieuwe waarden worden correct opgeslagen en zichtbaar.</li>
+            <li>Verplichte velden worden gecontroleerd en fouten gemeld.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="epic2">
-    <h2>Epic 2</h2>
-    <p>Als medewerker wil ik het uitlenen en innemen van films efficiënt kunnen beheren, zodat de administratie correct blijft en klanten hun films op tijd terugbrengen.</p>
-    <h2>User Stories</h2>
-    <ol>
-      <li>
-        Als medewerker wil ik per film kunnen zien welke klanten de film momenteel hebben geleend en wanneer deze moet worden teruggebracht, zodat ik overzicht heb over de uitstaande leningen.
-        <h3>Acceptatiecriteria:</h3>
-        <ul>
-          <li>Bij films die zijn uitgeleend, toont het systeem de naam van de klant en de verwachte retourdatum.</li>
-          <li>Bij beschikbare films wordt duidelijk aangegeven dat er geen lopende uitleen is.</li>
-        </ul>
-        <p></p>
-      </li>
-      <li>
-        Als medewerker wil ik een nieuwe film kunnen toevoegen aan het systeem, zodat nieuwe titels meteen beschikbaar zijn voor verhuur.
-        <h3>Acceptatiecriteria:</h3>
-        <ul>
-          <li>Alleen beschikbare films kunnen uitgeleend worden.</li>
-          <li>Na het uitlenen verandert de status naar "verhuurd" en wordt de gebruiker gekoppeld aan de uitleenregistratie.</li>
-          <li>Als een film al verhuurd is, voorkomt het systeem een tweede uitlening en toont het een foutmelding.</li>
-        </ul>
-        <p></p>
-      </li>
-      <li>
-        Als medewerker wil ik zodra een film is ingeleverd de uitleenstatus kunnen aanpassen naar "ingeleverd", zodat de film weer beschikbaar komt in het systeem.
-        <h3>Acceptatiecriteria:</h3>
-        <ul>
-          <li>Wanneer een film wordt ingeleverd, verandert de status automatisch naar "beschikbaar".</li>
-          <li>Een film die al beschikbaar is, kan niet opnieuw als ingeleverd worden gemarkeerd; het systeem geeft een foutmelding.</li>
-        </ul>
-        <p></p>
-      </li>
-    </ol>
+  <div class="card mb-4">
+    <div class="card-header bg-success text-white">
+      <h2 class="h5 mb-0">Epic 2</h2>
+    </div>
+    <div class="card-body">
+      <p class="mb-3">Als medewerker wil ik het uitlenen en innemen van films efficiënt kunnen beheren, zodat de administratie correct blijft.</p>
+      <h3 class="h6 mb-3">User Stories</h3>
+
+      <div class="card mb-3 border-start border-4 border-success shadow-sm">
+        <div class="card-body">
+          <p>Als medewerker wil ik per film kunnen zien wie de film geleend heeft en de retourdatum.</p>
+          <h4 class="h6">
+            <span class="badge bg-success">Acceptatiecriteria</span>
+          </h4>
+          <ul>
+            <li>Bij uitgeleende films toont het systeem naam klant + retourdatum.</li>
+            <li>Bij beschikbare films staat duidelijk dat er geen uitleen is.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mb-3 border-start border-4 border-success shadow-sm">
+        <div class="card-body">
+          <p>Als medewerker wil ik een film kunnen uitlenen.</p>
+          <h4 class="h6">
+            <span class="badge bg-success">Acceptatiecriteria</span>
+          </h4>
+          <ul>
+            <li>Alleen beschikbare films kunnen uitgeleend worden.</li>
+            <li>Status verandert naar "verhuurd" en klant wordt gekoppeld.</li>
+            <li>Als film al verhuurd is, verschijnt foutmelding.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mb-3 border-start border-4 border-success shadow-sm">
+        <div class="card-body">
+          <p>Als medewerker wil ik een film kunnen innemen.</p>
+          <h4 class="h6">
+            <span class="badge bg-success">Acceptatiecriteria</span>
+          </h4>
+          <ul>
+            <li>Status verandert naar "beschikbaar".</li>
+            <li>Film die al beschikbaar is, kan niet opnieuw als ingeleverd worden gemarkeerd; foutmelding verschijnt.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="epic3">
-    <h2>Epic 3</h2>
-    <p>Als medewerker wil ik klantgegevens kunnen beheren, zodat ik inzicht heb in hun leengeschiedenis en het systeem overzichtelijk blijft.</p>
-    <h2>User Stories</h2>
-    <ol>
-      <li>
-        Als medewerker wil ik per gebruiker de volledige leenhistorie kunnen inzien, zodat ik inzicht heb in openstaande verplichtingen.
-        <h3>Acceptatiecriteria:</h3>
-        <ul>
-          <li>Het systeem toont zowel lopende als afgesloten uitleningen per gebruiker.</li>
-          <li>Als een gebruiker nog nooit iets geleend heeft, verschijnt een melding "geen uitleenhistorie".</li>
-        </ul>
-        <p></p>
-      </li>
-      <li>
-        Als medewerker wil ik een gebruiker kunnen verwijderen, zonder dat alle historische gegevens verdwijnen, zodat het systeem opgeruimd blijft maar de uitleenadministratie correct blijft.
-        <h3>Acceptatiecriteria:</h3>
-        <ul>
-          <li>Een gebruiker kan alleen verwijderd worden als er geen lopende uitleningen zijn.</li>
-          <li>Bij verwijdering wordt de gebruiker gedeactiveerd, maar blijft de uitleenhistorie zichtbaar.</li>
-          <li>Als er nog lopende uitleningen zijn, wordt verwijderen geblokkeerd met een foutmelding.</li>
-        </ul>
-        <p></p>
-      </li>
-    </ol>
+  <div class="card mb-4">
+    <div class="card-header bg-warning text-dark">
+      <h2 class="h5 mb-0">Epic 3</h2>
+    </div>
+    <div class="card-body">
+      <p class="mb-3">Als medewerker wil ik klantgegevens kunnen beheren, zodat ik inzicht heb in hun leengeschiedenis.</p>
+      <h3 class="h6 mb-3">User Stories</h3>
+
+      <div class="card mb-3 border-start border-4 border-warning shadow-sm">
+        <div class="card-body">
+          <p>Als medewerker wil ik per gebruiker de volledige leenhistorie kunnen inzien.</p>
+          <h4 class="h6">
+            <span class="badge bg-warning text-dark">Acceptatiecriteria</span>
+          </h4>
+          <ul>
+            <li>Het systeem toont zowel lopende als afgesloten uitleningen per gebruiker.</li>
+            <li>Bij geen uitleenhistorie verschijnt melding "geen uitleenhistorie".</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mb-3 border-start border-4 border-warning shadow-sm">
+        <div class="card-body">
+          <p>Als medewerker wil ik een gebruiker kunnen verwijderen zonder uitleenhistorie kwijt te raken.</p>
+          <h4 class="h6">
+            <span class="badge bg-warning text-dark">Acceptatiecriteria</span>
+          </h4>
+          <ul>
+            <li>Verwijderen alleen mogelijk als er geen lopende uitleningen zijn.</li>
+            <li>Gebruiker wordt gedeactiveerd, uitleenhistorie blijft zichtbaar.</li>
+            <li>Bij lopende uitleningen wordt verwijderen geblokkeerd met foutmelding.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
