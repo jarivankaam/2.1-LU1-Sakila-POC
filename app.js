@@ -8,6 +8,7 @@ var indexRouter = require('./src/routes/index.route');
 var usersRouter = require('./src/routes/users.route');
 var aboutRouter = require('./src/routes/about.route');
 var filmsRouter = require('./src/routes/films.route');
+const authRouter = require('./src/routes/auth.route');
 
 var app = express();
 
@@ -20,7 +21,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src', 'public')));
+const session = require('express-session')
 
+app.use(
+  session({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1 * 60 * 1000,
+    },
+  })
+)
+app.use((req, res, next) => {
+  res.locals.user = req.session.user;
+  res.locals.authenticated = !!req.session.authenticated
+  next()
+})
+
+app.use('/auth', authRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/about', aboutRouter);
